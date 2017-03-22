@@ -36,7 +36,7 @@ android {
 
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion "android-O"
+        targetSdkVersion "O"
     }
 
     compileOptions {

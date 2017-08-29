@@ -140,7 +140,7 @@ public class MainActivity extends Activity {
         }
 
         private String getTitleSecondaryText() {
-            if (titlePrimary != null) {
+            if (titleSecondary != null) {
                 return titleSecondary.getText().toString();
             }
             return "";

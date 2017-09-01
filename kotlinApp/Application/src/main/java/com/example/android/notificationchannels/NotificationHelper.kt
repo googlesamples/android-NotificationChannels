@@ -30,23 +30,27 @@ internal class NotificationHelper
 /**
  * Registers notification channels, which can be used later by individual notifications.
 
- * @param ctx The application context
+ * @param context The application context
  */
-(ctx: Context) : ContextWrapper(ctx) {
+constructor(context: Context) : ContextWrapper(context) {
+
     private val manager: NotificationManager by lazy {
         getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
     }
 
     init {
-
-        val chan1 = NotificationChannel(PRIMARY_CHANNEL,
-                getString(R.string.noti_channel_default), NotificationManager.IMPORTANCE_DEFAULT)
+        val chan1 = NotificationChannel(
+                PRIMARY_CHANNEL,
+                getString(R.string.noti_channel_default),
+                NotificationManager.IMPORTANCE_DEFAULT)
         chan1.lightColor = Color.GREEN
         chan1.lockscreenVisibility = Notification.VISIBILITY_PRIVATE
         manager.createNotificationChannel(chan1)
 
-        val chan2 = NotificationChannel(SECONDARY_CHANNEL,
-                getString(R.string.noti_channel_second), NotificationManager.IMPORTANCE_HIGH)
+        val chan2 = NotificationChannel(
+                SECONDARY_CHANNEL,
+                getString(R.string.noti_channel_second),
+                NotificationManager.IMPORTANCE_HIGH)
         chan2.lightColor = Color.BLUE
         chan2.lockscreenVisibility = Notification.VISIBILITY_PUBLIC
         manager.createNotificationChannel(chan2)
@@ -64,13 +68,12 @@ internal class NotificationHelper
      * *
      * @return the builder as it keeps a reference to the notification (since API 24)
      */
-    fun getNotification1(title: String, body: String): Notification.Builder {
-        return Notification.Builder(applicationContext, PRIMARY_CHANNEL)
-                .setContentTitle(title)
-                .setContentText(body)
-                .setSmallIcon(smallIcon)
-                .setAutoCancel(true)
-    }
+    fun getNotification1(title: String, body: String) = Notification
+            .Builder(applicationContext, PRIMARY_CHANNEL)
+            .setContentTitle(title)
+            .setContentText(body)
+            .setSmallIcon(smallIcon)
+            .setAutoCancel(true)
 
     /**
      * Build notification for secondary channel.
@@ -81,13 +84,12 @@ internal class NotificationHelper
      * *
      * @return A Notification.Builder configured with the selected channel and details
      */
-    fun getNotification2(title: String, body: String): Notification.Builder {
-        return Notification.Builder(applicationContext, SECONDARY_CHANNEL)
-                .setContentTitle(title)
-                .setContentText(body)
-                .setSmallIcon(smallIcon)
-                .setAutoCancel(true)
-    }
+    fun getNotification2(title: String, body: String) = Notification
+            .Builder(applicationContext, SECONDARY_CHANNEL)
+            .setContentTitle(title)
+            .setContentText(body)
+            .setSmallIcon(smallIcon)
+            .setAutoCancel(true)
 
     /**
      * Send a notification.
@@ -107,7 +109,6 @@ internal class NotificationHelper
      */
     private val smallIcon: Int
         get() = android.R.drawable.stat_notify_chat
-
 
     companion object {
         val PRIMARY_CHANNEL = "default"

@@ -30,18 +30,18 @@ import kotlinx.android.synthetic.main.activity_main.*
  */
 class MainActivity : Activity() {
 
-    private lateinit var ui: MainUi
+    private lateinit var ui by lazy { MainUi(activity_main) }
 
     /*
      * Class for managing notifications
      */
-    private lateinit var helper: NotificationHelper
+    private val helper by lazy { NotificationHelper(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        ui = MainUi(activity_main)
-        helper = NotificationHelper(this)
+        ui
+        helper
     }
 
     /**
@@ -52,16 +52,13 @@ class MainActivity : Activity() {
      * @param title The title of the notification
      */
     fun sendNotification(id: Int, title: String) {
-        when (id) {
-            NOTI_PRIMARY1 -> helper.notify(
-                    id, helper.getNotification1(title, getString(R.string.primary1_body)))
-            NOTI_PRIMARY2 -> helper.notify(
-                    id, helper.getNotification1(title, getString(R.string.primary2_body)))
-            NOTI_SECONDARY1 -> helper.notify(
-                    id, helper.getNotification2(title, getString(R.string.secondary1_body)))
-            NOTI_SECONDARY2 -> helper.notify(
-                    id, helper.getNotification2(title, getString(R.string.secondary2_body)))
+        val notification = when (id) {
+            NOTI_PRIMARY1 -> helper.getNotification1(title, getString(R.string.primary1_body))
+            NOTI_PRIMARY2 -> helper.getNotification1(title, getString(R.string.primary2_body))
+            NOTI_SECONDARY1 -> helper.getNotification2(title, getString(R.string.secondary1_body))
+            NOTI_SECONDARY2 -> helper.getNotification2(title, getString(R.string.secondary2_body))
         }
+        helper.notify(id, notification)
     }
 
     /**
@@ -89,49 +86,25 @@ class MainActivity : Activity() {
      * View model for interacting with Activity UI elements. (Keeps core logic for sample
      * seperate.)
      */
-    internal inner class MainUi (root: View) : View.OnClickListener {
+    internal inner class MainUi(root: View) {
 
         init {
-            main_primary_send1.setOnClickListener(this)
-            main_primary_send2.setOnClickListener(this)
-            main_primary_config.setOnClickListener(this)
+            main_primary_send1.setOnClickListener { sendNotification(NOTI_PRIMARY1, titlePrimaryText) }
+            main_primary_send2.setOnClickListener { sendNotification(NOTI_PRIMARY2, titlePrimaryText) }
+            main_primary_config.setOnClickListener { goToNotificationSettings(NotificationHelper.PRIMARY_CHANNEL) }
 
-            main_secondary_send1.setOnClickListener(this)
-            main_secondary_send2.setOnClickListener(this)
-            main_secondary_config.setOnClickListener(this)
+            main_secondary_send1.setOnClickListener { sendNotification(NOTI_SECONDARY1, titleSecondaryText) }
+            main_secondary_send2.setOnClickListener { sendNotification(NOTI_SECONDARY2, titleSecondaryText) }
+            main_secondary_config.setOnClickListener { goToNotificationSettings(NotificationHelper.SECONDARY_CHANNEL) }
 
-            (root.findViewById<View>(R.id.btnA) as Button).setOnClickListener(this)
+            btnA.setOnClickListener { goToNotificationSettings() }
         }
 
         private val titlePrimaryText: String
-            get() {
-                if (main_primary_title != null) {
-                    return main_primary_title.text.toString()
-                }
-                return ""
-            }
+            get() = main_primary_title?.text?.toString() ?: ""
 
         private val titleSecondaryText: String
-            get() {
-                if (main_primary_title != null) {
-                    return main_secondary_title.text.toString()
-                }
-                return ""
-            }
-
-        override fun onClick(view: View) {
-            when (view.id) {
-                R.id.main_primary_send1 -> sendNotification(NOTI_PRIMARY1, titlePrimaryText)
-                R.id.main_primary_send2 -> sendNotification(NOTI_PRIMARY2, titlePrimaryText)
-                R.id.main_primary_config -> goToNotificationSettings(NotificationHelper.PRIMARY_CHANNEL)
-
-                R.id.main_secondary_send1 -> sendNotification(NOTI_SECONDARY1, titleSecondaryText)
-                R.id.main_secondary_send2 -> sendNotification(NOTI_SECONDARY2, titleSecondaryText)
-                R.id.main_secondary_config -> goToNotificationSettings(NotificationHelper.SECONDARY_CHANNEL)
-                R.id.btnA -> goToNotificationSettings()
-                else -> Log.e(TAG, "Unknown click event.")
-            }
-        }
+            get() = if (main_primary_title != null) main_secondary_title.text.toString() else ""
     }
 
     companion object {

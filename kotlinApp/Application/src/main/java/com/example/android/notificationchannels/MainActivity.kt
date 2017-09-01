@@ -30,7 +30,7 @@ import kotlinx.android.synthetic.main.activity_main.*
  */
 class MainActivity : Activity() {
 
-    private lateinit var ui by lazy { MainUi(activity_main) }
+    private val ui by lazy { MainUi(activity_main) }
 
     /*
      * Class for managing notifications

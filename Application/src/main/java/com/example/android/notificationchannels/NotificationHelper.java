@@ -55,7 +55,7 @@ class NotificationHelper extends ContextWrapper {
     /**
      * Get a notification of type 1
      *
-     * Provide the builder rather than the notification it's self as useful for making notification
+     * Provide the builder rather than the notification itself as useful for making notification
      * changes.
      *
      * @param title the title of the notification

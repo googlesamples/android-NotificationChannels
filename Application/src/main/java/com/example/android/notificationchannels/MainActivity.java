@@ -18,16 +18,11 @@ package com.example.android.notificationchannels;
 
 import android.app.Activity;
 import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 /**
@@ -119,17 +114,17 @@ public class MainActivity extends Activity {
         final TextView titleSecondary;
 
         private MainUi(View root) {
-            titlePrimary = (TextView) root.findViewById(R.id.main_primary_title);
-            ((Button) root.findViewById(R.id.main_primary_send1)).setOnClickListener(this);
-            ((Button) root.findViewById(R.id.main_primary_send2)).setOnClickListener(this);
-            ((ImageButton) root.findViewById(R.id.main_primary_config)).setOnClickListener(this);
+            titlePrimary = root.findViewById(R.id.main_primary_title);
+            root.findViewById(R.id.main_primary_send1).setOnClickListener(this);
+            root.findViewById(R.id.main_primary_send2).setOnClickListener(this);
+            root.findViewById(R.id.main_primary_config).setOnClickListener(this);
 
-            titleSecondary = (TextView) root.findViewById(R.id.main_secondary_title);
-            ((Button) root.findViewById(R.id.main_secondary_send1)).setOnClickListener(this);
-            ((Button) root.findViewById(R.id.main_secondary_send2)).setOnClickListener(this);
-            ((ImageButton) root.findViewById(R.id.main_secondary_config)).setOnClickListener(this);
+            titleSecondary = root.findViewById(R.id.main_secondary_title);
+            root.findViewById(R.id.main_secondary_send1).setOnClickListener(this);
+            root.findViewById(R.id.main_secondary_send2).setOnClickListener(this);
+            root.findViewById(R.id.main_secondary_config).setOnClickListener(this);
 
-            ((Button) root.findViewById(R.id.btnA)).setOnClickListener(this);
+            root.findViewById(R.id.btnA).setOnClickListener(this);
         }
 
         private String getTitlePrimaryText() {

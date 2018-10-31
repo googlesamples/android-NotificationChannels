@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.example.android.notificationchannels.MainActivity">
-F
+
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:rowCount="7"
         android:columnCount="2"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:rowCount="7">
 
         <EditText
             android:id="@+id/main_primary_title"
@@ -29,16 +28,14 @@ F
 
         <Button
             android:id="@+id/main_primary_send1"
-            android:layout_columnWeight="1"
             android:layout_height="wrap_content"
-
+            android:layout_columnWeight="1"
             android:text="@string/main_primary_send1" />
 
         <Button
             android:id="@+id/main_primary_send2"
-            android:layout_columnWeight="1"
             android:layout_height="wrap_content"
-
+            android:layout_columnWeight="1"
             android:text="@string/main_primary_send2" />
 
         <ImageButton
@@ -47,9 +44,8 @@ F
             android:layout_height="wrap_content"
             android:layout_columnSpan="2"
             android:layout_gravity="fill_horizontal"
-
-            android:src="@android:drawable/ic_menu_preferences"
-            android:contentDescription="@string/main_primary_config" />
+            android:contentDescription="@string/main_primary_config"
+            android:src="@android:drawable/ic_menu_preferences" />
 
         <Space
             android:layout_width="match_parent"
@@ -68,18 +64,15 @@ F
 
         <Button
             android:id="@+id/main_secondary_send1"
-            android:layout_columnWeight="1"
             android:layout_height="wrap_content"
-
+            android:layout_columnWeight="1"
             android:text="@string/main_secondary_send1" />
 
         <Button
             android:id="@+id/main_secondary_send2"
-            android:layout_columnWeight="1"
             android:layout_height="wrap_content"
-
-            android:text="@string/main_secondary_send2"/>
-
+            android:layout_columnWeight="1"
+            android:text="@string/main_secondary_send2" />
 
         <ImageButton
             android:id="@+id/main_secondary_config"
@@ -87,26 +80,22 @@ F
             android:layout_height="wrap_content"
             android:layout_columnSpan="2"
             android:layout_gravity="fill_horizontal"
-
-            android:src="@android:drawable/ic_menu_preferences"
-            android:contentDescription="@string/main_secondary_config" />
-
+            android:contentDescription="@string/main_secondary_config"
+            android:src="@android:drawable/ic_menu_preferences" />
     </GridLayout>
 
     <LinearLayout
         android:id="@+id/main_footer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
 
         <Button
-            android:text="@string/btnA_title"
+            android:id="@+id/btnA"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/btnA"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:text="@string/btnA_title" />
     </LinearLayout>
-
-
 </RelativeLayout>
